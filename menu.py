@@ -1,5 +1,34 @@
 import random
 
+
+def menu():
+    print('''
+Menu
+    [1] - Iniciar Quiz
+    [2] - Opção 2''
+    [3] - Opção 3
+    ''')
+    escolha = input('Escolha uma opção: ')
+    return escolha
+
+
+def main():
+    escolha = menu()
+
+    if escolha == "1":
+        print('Você escolheu a opção 1.')
+        menu_quiz()
+    elif escolha == "2":
+        print('Você escolheu a opção 2.')
+    elif escolha == "3":
+        print('Você escolheu a opção 3.')
+    else:
+        print('Opção inválida. Por favor, escolha uma opção válida.')
+        main()
+
+
+
+
 # Dicionário com perguntas e respostas
 quiz_data = {
     "Qual é a principal característica que diferencia a Fórmula E de outras categorias de automobilismo?": {
@@ -49,7 +78,7 @@ contador = 0
 def fazer_pergunta(pergunta, opcoes, resposta_certa):
     global contador
     contador += 1
-    print(f'{contador} - {pergunta}')
+    print(f'---------------------\n{contador} - {pergunta}')
 
     for chave, valor in opcoes.items():
         print(f"{chave}: {valor}")
@@ -66,11 +95,11 @@ def fazer_pergunta(pergunta, opcoes, resposta_certa):
         return True
     else:
         respostaUpper = resposta_certa.strip().upper()
-        print(f"Incorreto! A resposta correta era {respostaUpper} {opcoes[resposta_certa]}")
+        print(f"- Incorreto! - A resposta correta era {respostaUpper} {opcoes[resposta_certa]}")
         return False
 
 
-def principal():
+def quiz():
     perguntas = list(quiz_data.keys())
     random.shuffle(perguntas)  # Randomiza a ordem das perguntas
 
@@ -87,24 +116,18 @@ def principal():
 
     print(f"\nSeu resultado: {pontuacao}/{total_perguntas}")
 
-
-def menu():
+def menu_quiz():
     print('''
-Menu
-    [1] - Iniciar Quiz
-    [2] - Opção 2
-    [3] - Opção 3
-    ''')
+Modo de jogo
+    [1] - Solo  (descrição)
+    [2] - Competitivo   (descrição)
+    [3] - Opção 3   (descrição)
+        ''')
     escolha = input('Escolha uma opção: ')
-    return escolha
-
-
-def main():
-    escolha = menu()
 
     if escolha == "1":
         print('Você escolheu a opção 1.')
-        principal()
+        quiz()
     elif escolha == "2":
         print('Você escolheu a opção 2.')
     elif escolha == "3":
@@ -112,7 +135,6 @@ def main():
     else:
         print('Opção inválida. Por favor, escolha uma opção válida.')
         main()
-
 
 if __name__ == "__main__":
     main()
