@@ -30,7 +30,7 @@ def main():
                 sys.exit()
         elif escolha == "3":
             print('\nVocê escolheu a opção 3: Acessar Site Oficial da Fórmula E.\n')
-            url = 'https://www.fiaformulae.com/'
+            url = 'https://synthica.netlify.app/'
             webbrowser.open(url)
         elif escolha == "4":
             print('\nSaindo do programa. Até mais!')
