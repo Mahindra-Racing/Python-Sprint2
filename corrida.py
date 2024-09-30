@@ -1,5 +1,5 @@
 import random
-import subprocess
+import sys
 
 # Dicionário com as equipes
 equipes = {
@@ -8,7 +8,6 @@ equipes = {
     '3': {'nome': 'Equipe 3'}
 }
 
-
 def obter_opcao(menu, categoria):
     while True:
         opcao = input(menu)
@@ -16,7 +15,6 @@ def obter_opcao(menu, categoria):
             return opcao
         else:
             print("Opção inválida. Por favor, tente novamente.")
-
 
 def simular_corrida(piloto_nome, equipe_nome):
     energia = 100
@@ -37,7 +35,7 @@ def simular_corrida(piloto_nome, equipe_nome):
         print("1: Tentar ultrapassagem (gasta energia)")
         print("2: Manter posição (gasta pouca energia)")
         print("3: Forçar uma ultrapassagem (gasta muita energia, chance maior de perder posições)")
-        print("4: Abandonar a corrida (volta ao menu)")
+        print("4: Abandonar a corrida (fechar o aplicativo)")
 
         escolha = obter_opcao("Digite o número da ação escolhida: ", ['1', '2', '3', '4'])
 
@@ -65,9 +63,8 @@ def simular_corrida(piloto_nome, equipe_nome):
                     print("Você perdeu 1 posição!")
 
         elif escolha == '4':
-            print('Você voltou ao menu principal')
-            subprocess.run(["python", "menu.py"])
-            return
+            print('\nSaindo do programa. Até mais!')
+            sys.exit(1)  # Encerra com código de saída 1
 
         # Verifica se o jogador ficou sem energia
         if energia <= 0:
@@ -91,31 +88,30 @@ def simular_corrida(piloto_nome, equipe_nome):
 
     # Opção de jogar novamente ou voltar ao menu
     while True:
-        voltar_menu = input('1: Jogar novamente\n2: Voltar ao menu\n3: Sair\n: ').strip().lower()
+        voltar_menu = input('1: Jogar novamente\n2: Voltar ao menu\n Escolha: ').strip().lower()
         if voltar_menu == '1':
             main()
         elif voltar_menu == '2':
-            subprocess.run(["python", "menu.py"])
-            return
-        elif voltar_menu == '3':
-            exit()
+            sys.exit(0)  # Encerrar com código de saída 0 para voltar ao menu
         else:
             print("Opção inválida. Por favor, escolha uma opção válida.")
 
-
 def main():
     print("=== BEM-VINDO AO JOGO DE FÓRMULA E ===")
-    piloto_nome = input("Digite o seu nome: ")
+    piloto_nome = input("Digite o seu nome: ").strip()
+
+    if not piloto_nome:
+        print("O nome do piloto não pode estar vazio.")
+        return main()
 
     print("\nEscolha sua equipe:")
     for key, value in equipes.items():
         print(f"{key}: {value['nome']}")
-    equipe_escolhida = obter_opcao("Digite o número da equipe escolhida: ", equipes)
+    equipe_escolhida = obter_opcao("Digite o número da equipe escolhida: ", equipes.keys())
 
     # Iniciando a corrida
     print("\nIniciando a Corrida...")
     simular_corrida(piloto_nome, equipes[equipe_escolhida]['nome'])
-
 
 if __name__ == "__main__":
     main()

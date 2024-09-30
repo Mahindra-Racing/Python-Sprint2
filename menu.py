@@ -23,14 +23,11 @@ def main():
             menu_quiz()
         elif escolha == "2":
             print('\nVocê escolheu a opção 2: Simular Corrida.\n')
-            # Verifique se o arquivo corrida.py existe no diretório atual
-            try:
-                subprocess.run(["python", "corrida.py"], check=True)
-            except subprocess.CalledProcessError:
-                print("Erro ao executar corrida.py. Verifique se o arquivo existe e está funcionando corretamente.")
-            except FileNotFoundError:
-                print("Python não está instalado ou não está no PATH.")
-            main()
+            # Executa corrida.py e captura o código de saída
+            result = subprocess.run(["python", "corrida.py"])
+            if result.returncode == 1:
+                print('\nSaindo do programa. Até mais!')
+                sys.exit()
         elif escolha == "3":
             print('\nVocê escolheu a opção 3: Acessar Site Oficial da Fórmula E.\n')
             url = 'https://www.fiaformulae.com/'
@@ -188,8 +185,7 @@ def quiz():
         escolha = input('Escolha uma opção:\n  [1] Voltar ao menu\n  [2] Sair\nSua escolha: ').strip()
         if escolha == "1":
             print()
-            main()
-            break
+            return  # Retorna ao loop principal
         elif escolha == "2":
             print('\nSaindo do programa. Até mais!')
             sys.exit()
@@ -249,8 +245,7 @@ def competitivo():
         escolha = input('Escolha uma opção:\n  [1] Voltar ao menu\n  [2] Sair\nSua escolha: ').strip()
         if escolha == "1":
             print()
-            main()
-            break
+            return  # Retorna ao loop principal
         elif escolha == "2":
             print('\nSaindo do programa. Até mais!')
             sys.exit()
@@ -277,8 +272,7 @@ Modo de Jogo
             break
         elif escolha == "3":
             print()
-            main()
-            break
+            return  # Retorna ao loop principal
         else:
             print('Opção inválida. Por favor, escolha uma opção válida (1/2/3).\n')
 
