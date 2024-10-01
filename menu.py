@@ -8,7 +8,7 @@ def menu():
 Menu
     [1] - Iniciar Quiz
     [2] - Simular Corrida
-    [3] - Site Oficial da Fórmula E
+    [3] - Nosso site
     [4] - Sair
     ''')
     escolha = input('Escolha uma opção: ')
@@ -29,7 +29,7 @@ def main():
                 print('\nSaindo do programa. Até mais!')
                 sys.exit()
         elif escolha == "3":
-            print('\nVocê escolheu a opção 3: Acessar Site Oficial da Fórmula E.\n')
+            print('\nVocê escolheu a opção 3: Acessar o nosso site.\n')
             url = 'https://synthica.netlify.app/'
             webbrowser.open(url)
         elif escolha == "4":
